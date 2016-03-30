@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="Dashboard">
+
+        <title>FoodPortal</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet">
+        <!--external css-->
+        <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">
+        <link href="assets/css/foodportal.css" rel="stylesheet" type="text/css"/>
+        <!-- Custom styles for this template -->
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <section id="container" >
+            <!-- **********************************************************************************************************************************************************
+            TOP BAR CONTENT & NOTIFICATIONS
+            *********************************************************************************************************************************************************** -->
+            <!--header start-->
+            <header class="header black-bg">
+                <div class="sidebar-toggle-box">
+                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Menu"></div>
+                </div>
+                <!--logo start-->
+                <a href="index.html" class="logo"><img src="assets/img/logo_nutrination.png" alt="" height=40/></a>
+                <!--logo end-->
+                <div class="top-menu">
+                </div>
+            </header>
+            <!--header end-->
+
+            <!-- **********************************************************************************************************************************************************
+            MAIN CONTENT
+            *********************************************************************************************************************************************************** -->
+            <!--main content start-->
+            <section id="main-content">
+                <section class="wrapper">
+                    <div class="row mt">
+                        <div id="columnchart" style="width: 100%; height: 350px; margin: 0 auto"></div>
+                    </div>
+                </section>
+                <!--<div id='map' style="width:100%;height:600px"></div>-->
+            </section>
+            <!--main content end-->
+            <!--footer start-->
+            <footer >
+                <div class="text-center">
+                    2016 - Food Portal
+                    <a href="index.html#" class="go-top">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+            </footer>
+            <!--footer end-->
+        </section>
+
+        <!-- js placed at the end of the document so the pages load faster -->
+        <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/jquery-1.8.3.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+
+        <!--highcharts js-->
+        <script src="assets/js/highchart/highstock.js"></script>
+        <script src="assets/js/highchart/highcharts.js" type="text/javascript"></script>
+        <script src="assets/js/highchart/exporting.js" type="text/javascript"></script>
+        <script src="DataSource/PovertyRates.js" type="text/javascript"></script>
+
+        <!--common script for all pages-->
+        <script src="assets/js/common-scripts.js"></script>
+        <script type = "text/javascript" language = "javascript">
+
+            function $_GETPARAM(param) {
+                var vars = {};
+                window.location.href.replace(location.hash, '').replace(
+                        /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+                        function(m, key, value) { // callback
+                            vars[key] = value !== undefined ? value : '';
+                        }
+                );
+
+                if (param) {
+                    return vars[param] ? vars[param] : null;
+                }
+                return vars;
+            }
+            
+            function getCountry() {
+                return $_GETPARAM('country') === "Cambodia" ?  povertyCambodia :
+                        $_GETPARAM('country') === "Malaysia" ?  povertyMalaysia :
+                        $_GETPARAM('country') === "Thailand" ?  povertyThailand :
+                        $_GETPARAM('country') === "Indonesia" ?  povertyIndonesia :
+                        $_GETPARAM('country') === "Laos" ? povertyLaos :
+                        $_GETPARAM('country') === "Philippines" ?  povertyPhilippines :
+                        $_GETPARAM('country') === "Vietnam" ?  povertyVietnam :
+                        countrySelected = povertyVietnam;
+            }
+            
+            var countrySelected=getCountry();
+
+            optionsRepartion = {
+                chart: {
+                    type: 'column',
+                    zoomType: 'y'
+                },
+                title: {
+                    text: 'Poverty headcount ratio at national poverty lines (% of population)'
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Percentage'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                tooltip: {
+                    pointFormat: '<b>{point.y}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        size: '100%',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.2f} %  ( {point.y} )',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: countrySelected
+            };
+            $('#columnchart').highcharts(optionsRepartion);
+
+
+        </script>
+    </body>
+</html>
