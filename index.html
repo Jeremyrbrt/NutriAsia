@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="author" content="Dashboard">
 
-        <title>FoodPortal</title>
+        <title>Nutri-Asia</title>
 
         <!-- Bootstrap core CSS -->
         <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -35,9 +35,6 @@
             *********************************************************************************************************************************************************** -->
             <!--header start-->
             <header class="header black-bg">
-                <div class="sidebar-toggle-box">
-                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Menu"></div>
-                </div>
                 <!--logo start-->
                 <a href="index.html" class="logo"><img src="assets/img/logo_nutrination.png" alt="" height=40/></a>
                 <!--logo end-->
@@ -53,8 +50,8 @@
             <section id="main-content">
                 <section class="wrapper">
                     <h4>Undernourishment in south-east Asia (2013)</h4>
-                    <div class="row mt"> 
-                        <div id='map' style="width:100%;height:450px"></div>
+                    <div class="row"> 
+                        <div id='map' class="col-lg-12" style="height:400px"></div>
                     </div>
                 </section>
                 <!--<div id='map' style="width:100%;height:600px"></div>-->
@@ -63,7 +60,7 @@
             <!--footer start-->
             <footer >
                 <div class="text-center">
-                    2016 - Food Portal
+                    2016 - Nutri-Asia by DUONG - ROBERT - SADKI
                     <a href="index.html#" class="go-top">
                         <i class="fa fa-angle-up"></i>
                     </a>
@@ -106,7 +103,7 @@
             info.update = function(props) {
                 this._div.innerHTML = '<h4>Population undernourished (%)</h4>' + (props ?
                         '<b>' + props.name + '</b><br />' + props.undernourishment + ' %'
-                        : 'Hover on a country');
+                        : 'Hover on a country or click to see more');
             };
 
             info.addTo(map);
